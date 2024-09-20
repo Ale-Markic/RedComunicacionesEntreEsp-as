@@ -104,7 +104,6 @@ public class PantallaInicio {
 			
 		}
 		else {
-			//_temporizador.stop();
 			reiniciarIndiceImagen();
 		}
 	}
