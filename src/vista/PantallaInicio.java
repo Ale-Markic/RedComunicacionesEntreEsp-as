@@ -13,16 +13,20 @@ import java.awt.event.ActionListener;
 import java.awt.image.BufferedImage;
 
 import javax.swing.ImageIcon;
+import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.Timer;
+import javax.swing.UIManager;
+import javax.swing.UnsupportedLookAndFeelException;
 
 public class PantallaInicio {
 
 	private JFrame _frame;
 	private JPanel _contenido;
 	private JLabel _lblImagen;
+	private JButton _btnComenzar;
 	private Timer _temporizador;
 	private int _indiceImagen = 0;
 	private String [] _imagenes = {
@@ -63,17 +67,24 @@ public class PantallaInicio {
 	private void initialize() {
 		inicializarElJFrame();
 		
+
+		
 		_contenido = new JPanel();
 		configurarContenido();
 		
 		_lblImagen = new JLabel();
-		configurarImagenes();
+		configurarImagenes();	
+		
+		
+		_btnComenzar = new JButton("Comenzar");
+		configurarBtnComenzar();
+
+		
 		
 		
 		iniciarTemporizador();
 		
-		_frame.setVisible(true);
-		
+		_frame.setVisible(true);	
 	}
 	
 	/**
@@ -100,8 +111,7 @@ public class PantallaInicio {
 			//Aca se carga la imagen
 			ImageIcon icono = new ImageIcon(getClass().getResource(_imagenes[_indiceImagen]));
 			Image imagen = icono.getImage();
-			_lblImagen.setIcon(new ImageIcon(imagen));
-			
+			_lblImagen.setIcon(new ImageIcon(imagen));			
 		}
 		else {
 			reiniciarIndiceImagen();
@@ -161,7 +171,6 @@ public class PantallaInicio {
 	
 	private void inicializarElJFrame() {
 		_frame = new JFrame();
-		//_frame.setBounds(100, 100, 1138, 650);
 		_frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		
 		//Obtener el dispositivo grafico y poner el JFrame en pantalla completa
@@ -177,6 +186,11 @@ public class PantallaInicio {
 		_lblImagen.setIcon(new ImageIcon(getClass().getResource(_imagenes[_indiceImagen])));
 		_lblImagen.setBounds(110, 50, 1138, 650);
 		_contenido.add(_lblImagen);
+	}
+	
+	private void configurarBtnComenzar() {
+		_btnComenzar.setBounds(550, 500, 200, 100);
+		_frame.getContentPane().add(_btnComenzar);
 	}
 
 }
