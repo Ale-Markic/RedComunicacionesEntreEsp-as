@@ -32,6 +32,7 @@ public class PantallaInicio {
 	private JPanel _contenido;
 	private JLabel _lblImagen;
 	private JButton _btnComenzar;
+	private JButton _btnInformacion;
 	private Timer _temporizador;
 	private int _indiceImagen = 0;
 	private String [] _imagenes = {
@@ -79,8 +80,12 @@ public class PantallaInicio {
 		
 		_lblImagen = new JLabel();
 		configurarImagenes();
+		
 		configurarBtnComenzar();
-
+		
+		_btnInformacion = new JButton("Mas Informacion");
+		configurarBtnInformacion();
+		
 		iniciarTemporizador();
 		
 		
@@ -197,8 +202,21 @@ public class PantallaInicio {
 				_frame.dispose();
 			}
 		});
-		_btnComenzar.setBounds(550, 638, 200, 61);
+		_btnComenzar.setBounds(450, 638, 200, 61);
 		_frame.getContentPane().add(_btnComenzar);
+	}
+	
+	private void configurarBtnInformacion() {
+		_btnInformacion.setBounds(650,  638, 200, 61);
+		_frame.getContentPane().add(_btnInformacion);
+		
+		_btnInformacion.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				
+			}
+			
+		});
 	}
 
 }
