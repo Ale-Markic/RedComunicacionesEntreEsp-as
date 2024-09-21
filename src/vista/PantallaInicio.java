@@ -8,6 +8,7 @@ import java.awt.Graphics2D;
 import java.awt.GraphicsDevice;
 import java.awt.GraphicsEnvironment;
 import java.awt.Image;
+import java.awt.LayoutManager;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.image.BufferedImage;
@@ -16,10 +17,14 @@ import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
+import javax.swing.JLayeredPane;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.Timer;
 import javax.swing.UIManager;
 import javax.swing.UnsupportedLookAndFeelException;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 
 public class PantallaInicio {
 
@@ -73,18 +78,13 @@ public class PantallaInicio {
 		configurarContenido();
 		
 		_lblImagen = new JLabel();
-		configurarImagenes();	
-		
-		
-		_btnComenzar = new JButton("Comenzar");
+		configurarImagenes();
 		configurarBtnComenzar();
 
-		
-		
-		
 		iniciarTemporizador();
 		
-		_frame.setVisible(true);	
+		
+		_frame.setVisible(true);
 	}
 	
 	/**
@@ -111,7 +111,7 @@ public class PantallaInicio {
 			//Aca se carga la imagen
 			ImageIcon icono = new ImageIcon(getClass().getResource(_imagenes[_indiceImagen]));
 			Image imagen = icono.getImage();
-			_lblImagen.setIcon(new ImageIcon(imagen));			
+			_lblImagen.setIcon(new ImageIcon(imagen));
 		}
 		else {
 			reiniciarIndiceImagen();
@@ -189,7 +189,15 @@ public class PantallaInicio {
 	}
 	
 	private void configurarBtnComenzar() {
-		_btnComenzar.setBounds(550, 500, 200, 100);
+		_btnComenzar = new JButton("Comenzar");
+		_btnComenzar.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				JOptionPane.showInputDialog("aca deberia iniciar el juego");
+				_frame.dispose();
+			}
+		});
+		_btnComenzar.setBounds(550, 638, 200, 61);
 		_frame.getContentPane().add(_btnComenzar);
 	}
 
