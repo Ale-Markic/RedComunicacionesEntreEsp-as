@@ -175,7 +175,7 @@ public class PantallaInicio {
 	}
 	
 	private void inicializarElJFrame() {
-		_frame = new JFrame();
+		_frame = new JFrame("Pantalla de carga");
 		_frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		
 		//Obtener el dispositivo grafico y poner el JFrame en pantalla completa
@@ -213,7 +213,7 @@ public class PantallaInicio {
 		_btnInformacion.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
-				
+				PantallaInformacion pantallaInformacion = new PantallaInformacion();
 			}
 			
 		});
