@@ -214,6 +214,7 @@ public class PantallaInicio {
 			@Override
 			public void mouseClicked(MouseEvent e) {
 				PantallaInformacion pantallaInformacion = new PantallaInformacion();
+				_frame.dispose();
 			}
 			
 		});

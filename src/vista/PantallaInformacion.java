@@ -3,8 +3,9 @@ package vista;
 import java.awt.BorderLayout;
 import java.awt.GraphicsDevice;
 import java.awt.GraphicsEnvironment;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 import java.io.BufferedReader;
-import java.io.FileReader;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
@@ -42,10 +43,18 @@ public class PantallaInformacion {
 		cargarArchivoConInformacion();
 		
 		JButton volverAtras = new JButton("volver atras");
+		volverAtras.setBounds(550, 638, 200, 61);
+		_frameInformacion.getContentPane().add(volverAtras);
+		volverAtras.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				PantallaInicio pantallaInicio = new PantallaInicio();
+				_frameInformacion.dispose();
+			}
+		});
 		
 		
-		
-		
+		_frameInformacion.setVisible(true);
 		
 
 	}
