@@ -1,1 +1,6 @@
-prueba de texto, aqui deberia aparecer la informacion del juego
+Tenemos un grupo de espías en territorio enemigo que necesitan recibir un mensaje importante.
+La comunicación entre ellos se realiza de manera personal, pero no todos los espías pueden encontrarse entre sí. 
+Representamos esta situación como un grafo, donde cada espía es un vértice y las conexiones entre ellos son aristas. 
+Cada encuentro entre espías tiene un riesgo de ser interceptado por el enemigo, con una probabilidad específica para cada conexión. 
+Nuestro objetivo es encontrar una forma de enviar el mensaje a toda la red minimizando el riesgo de que el enemigo intercepte la 
+comunicación más peligrosa.

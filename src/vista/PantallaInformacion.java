@@ -1,6 +1,8 @@
 package vista;
 
 import java.awt.BorderLayout;
+import java.awt.Color;
+import java.awt.Font;
 import java.awt.GraphicsDevice;
 import java.awt.GraphicsEnvironment;
 import java.awt.event.MouseAdapter;
@@ -31,20 +33,18 @@ public class PantallaInformacion {
 		inicializarElFrame();
 		
 		JPanel panel = new JPanel();
-		panel.setLayout(new BorderLayout());
-		_frameInformacion.getContentPane().add(panel, BorderLayout.CENTER);
+		configurarPanel(panel);
+
 		
 		
 		areaDeTexto = new JTextArea();
-		areaDeTexto.setEditable(false);
-		JScrollPane scrollPane = new JScrollPane();
-		panel.add(scrollPane, BorderLayout.CENTER);
+		inicializarAreaDeTexto(panel);
 		
-		cargarArchivoConInformacion();
+		cargarArchivoConInformacion(panel);
 		
 		JButton volverAtras = new JButton("volver atras");
-		volverAtras.setBounds(550, 638, 200, 61);
-		_frameInformacion.getContentPane().add(volverAtras);
+		volverAtras.setBounds(225, 350, 200, 61);
+		panel.add(volverAtras);
 		volverAtras.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
@@ -53,40 +53,60 @@ public class PantallaInformacion {
 			}
 		});
 		
-		
+		_frameInformacion.getContentPane().add(panel);
 		_frameInformacion.setVisible(true);
 		
 
 	}
 	
 	
-	public void cargarArchivoConInformacion() {
+	private void cargarArchivoConInformacion(JPanel panel) {
 		String rutaArchivoConInformacion = "/recursos/prueba.txt";
 		InputStream inputStream = getClass().getResourceAsStream(rutaArchivoConInformacion);
-		
 		
 		try(BufferedReader reader = new BufferedReader(new InputStreamReader(inputStream))){
 			String linea;
 			while((linea = reader.readLine()) != null) {
-				areaDeTexto.append(linea + "/n");
+				areaDeTexto.append(linea);
 			}
 		} catch(IOException e) {
 			e.printStackTrace();
 			JOptionPane.showMessageDialog(null,"Error al leer el archivo: " ,e.getMessage(), JOptionPane.ERROR_MESSAGE);
 			_frameInformacion.dispose();
 		}
-		_frameInformacion.add(areaDeTexto);
+		panel.add(areaDeTexto);
+	}
+	
+	private void configurarPanel(JPanel panel) {
 		
-		
+		panel.setBackground(setearColorDelFondo());
+		panel.setLayout(null);
+		panel.setBounds(0, 0, 700, 500);
+		//_frameInformacion.getContentPane().add(panel, BorderLayout.CENTER);
+	}
+	
+	private void inicializarAreaDeTexto(JPanel panel) {
+		areaDeTexto.setBounds(85, 25, 500, 300);
+		areaDeTexto.setEditable(false);
+		areaDeTexto.setLineWrap(true);
+		areaDeTexto.setWrapStyleWord(true);
+		areaDeTexto.setFont(new Font("Arial", Font.BOLD, 15));
+		//panel.add(areaDeTexto);
 	}
 	
 	private void inicializarElFrame() {
 		_frameInformacion = new JFrame("Informacion");
 		_frameInformacion.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		
-		//Obtener el dispositivo grafico y poner el JFrame en pantalla completa
-		GraphicsDevice dispositivoGrafico = GraphicsEnvironment.getLocalGraphicsEnvironment().getDefaultScreenDevice();
-		dispositivoGrafico.setFullScreenWindow(_frameInformacion);
+		_frameInformacion.setBounds(0, 0, 700, 500);
+		_frameInformacion.setResizable(false);
+		_frameInformacion.getContentPane().setLayout(null);
+		_frameInformacion.setLocationRelativeTo(null);
+
+	}
+	private Color setearColorDelFondo() {
+		Color colorFondo = new Color(194, 113, 138);		
+		return colorFondo;
 	}
 
 }
