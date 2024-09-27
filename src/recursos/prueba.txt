@@ -1,4 +1,4 @@
-Tenemos un grupo de espías en territorio enemigo que necesitan recibir un mensaje importante.
+Tenemos un grupo de espías en territorio enemigo que necesitan recibir un mensaje importante. 
 La comunicación entre ellos se realiza de manera personal, pero no todos los espías pueden encontrarse entre sí. 
 Representamos esta situación como un grafo, donde cada espía es un vértice y las conexiones entre ellos son aristas. 
 Cada encuentro entre espías tiene un riesgo de ser interceptado por el enemigo, con una probabilidad específica para cada conexión. 
