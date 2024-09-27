@@ -4,6 +4,8 @@ import java.awt.EventQueue;
 
 import javax.swing.JFrame;
 
+import org.openstreetmap.gui.jmapviewer.JMapViewer;
+
 public class Mapa {
 
 	private JFrame frame;
