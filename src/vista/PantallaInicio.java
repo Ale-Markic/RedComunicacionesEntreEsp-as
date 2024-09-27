@@ -101,7 +101,7 @@ public class PantallaInicio {
 	 * Metodo principal de encargarse de cambiar las imagenes cada cierto tiempo
 	 */
 	private void iniciarTemporizador() {
-		int intervalo = 4000; //3000ms = 3s
+		int intervalo = 3000; //3000ms = 3s
 		_temporizador = new Timer(intervalo, new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
@@ -204,7 +204,8 @@ public class PantallaInicio {
 		_btnComenzar.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
-				JOptionPane.showInputDialog("aca deberia iniciar el juego");
+				Mapa mapa = new Mapa();
+				//JOptionPane.showInputDialog("aca deberia iniciar la aplicacion");
 				_frame.dispose();
 			}
 		});
