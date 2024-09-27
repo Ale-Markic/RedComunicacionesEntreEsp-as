@@ -44,6 +44,7 @@ public class PantallaInicio {
 			"/recursos/Imagen espias 5.jpg",
 			"/recursos/Imagen mundo 2.jpg",
 			"/recursos/Imagen espias 6.jpg",
+			"/recursos/Imagen espias 7.jpg",
 			"/recursos/Imagen Argentina conectada con pins.jpg"
 	};
 	
@@ -100,7 +101,7 @@ public class PantallaInicio {
 	 * Metodo principal de encargarse de cambiar las imagenes cada cierto tiempo
 	 */
 	private void iniciarTemporizador() {
-		int intervalo = 3000; //3000ms = 3s
+		int intervalo = 4000; //3000ms = 3s
 		_temporizador = new Timer(intervalo, new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
