@@ -38,8 +38,12 @@ public class PantallaInicio {
 	private String [] _imagenes = {
 			"/recursos/Imagen espias 1.jpg",
 			"/recursos/Imagen espias 2.jpg",
+			"/recursos/Imagen mundo 1.jpg",
 			"/recursos/Imagen espias 3.jpg",
 			"/recursos/Imagen espias 4.jpg",
+			"/recursos/Imagen espias 5.jpg",
+			"/recursos/Imagen mundo 2.jpg",
+			"/recursos/Imagen espias 6.jpg",
 			"/recursos/Imagen Argentina conectada con pins.jpg"
 	};
 	
