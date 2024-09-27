@@ -88,7 +88,7 @@ public class PantallaInicio {
 		
 		iniciarTemporizador();
 		
-		
+		_frame.getContentPane().add(_contenido);
 		_frame.setVisible(true);
 	}
 	
@@ -121,6 +121,7 @@ public class PantallaInicio {
 		else {
 			reiniciarIndiceImagen();
 		}
+		agregarBotonesALaImagen();
 	}
 	
 	/**
@@ -170,23 +171,23 @@ public class PantallaInicio {
 		graficos2D.dispose();
 	}
 	
-	private void reiniciarIndiceImagen() {
-		this._indiceImagen = 0;
-	}
-	
 	private void inicializarElJFrame() {
 		_frame = new JFrame("Pantalla de carga");
 		_frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		_frame.getContentPane().setLayout(null);
+		_frame.setLocationRelativeTo(null);
 		
 		//Obtener el dispositivo grafico y poner el JFrame en pantalla completa
 		GraphicsDevice dispositivoGrafico = GraphicsEnvironment.getLocalGraphicsEnvironment().getDefaultScreenDevice();
 		dispositivoGrafico.setFullScreenWindow(_frame);
 	}
+	
 	private void configurarContenido() {
-		_frame.setContentPane(_contenido);
 		_contenido.setLayout(null);
 		_contenido.setBackground(new Color(0,0,0));
+		_contenido.setBounds(0, 0, _frame.getWidth(),_frame.getHeight() );
 	}
+	
 	private void configurarImagenes() {
 		_lblImagen.setIcon(new ImageIcon(getClass().getResource(_imagenes[_indiceImagen])));
 		_lblImagen.setBounds(110, 50, 1138, 650);
@@ -202,13 +203,13 @@ public class PantallaInicio {
 				_frame.dispose();
 			}
 		});
-		_btnComenzar.setBounds(450, 638, 200, 61);
-		_frame.getContentPane().add(_btnComenzar);
+		_btnComenzar.setBounds(345, 538, 200, 61);
+		_lblImagen.add(_btnComenzar);
 	}
 	
 	private void configurarBtnInformacion() {
-		_btnInformacion.setBounds(650,  638, 200, 61);
-		_frame.getContentPane().add(_btnInformacion);
+		_btnInformacion.setBounds(555,  538, 200, 61);
+		_lblImagen.add(_btnInformacion);
 		
 		_btnInformacion.addMouseListener(new MouseAdapter() {
 			@Override
@@ -218,6 +219,15 @@ public class PantallaInicio {
 			}
 			
 		});
+	}
+	
+	private void agregarBotonesALaImagen() {
+		_lblImagen.add(_btnComenzar);
+		_lblImagen.add(_btnInformacion);
+	}
+	
+	private void reiniciarIndiceImagen() {
+		this._indiceImagen = 0;
 	}
 
 }
