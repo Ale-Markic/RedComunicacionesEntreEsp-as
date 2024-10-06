@@ -1,4 +1,4 @@
-package logicaDeNegocio;
+package controladores;
 
 import java.math.BigDecimal;
 
