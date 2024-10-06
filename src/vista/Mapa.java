@@ -18,6 +18,8 @@ import org.openstreetmap.gui.jmapviewer.JMapViewer;
 import org.openstreetmap.gui.jmapviewer.MapMarkerDot;
 import org.openstreetmap.gui.jmapviewer.interfaces.MapMarker;
 
+import logicaDeNegocio.ControladorDelGrafo;
+
 public class Mapa {
 
 	private JFrame frame;
@@ -63,7 +65,6 @@ public class Mapa {
 		configurarMapa();
 		
 		
-		
 		detectarCoordenada();
 		
 		frame.setVisible(true);
@@ -81,6 +82,7 @@ public class Mapa {
 					coordenadas.add(agregarMarcador);
 					String nombreEspia = JOptionPane.showInputDialog("Nombre del espia: ");
 					mapa.addMapMarker(agregarPuntoEnElMapa(nombreEspia, agregarMarcador));
+					ControladorDelGrafo.crearVertice(nombreEspia, agregarMarcador);
 				}
 			}
 			
