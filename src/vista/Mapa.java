@@ -122,6 +122,7 @@ public class Mapa {
 		GraphicsDevice dispositivoGrafico = GraphicsEnvironment.getLocalGraphicsEnvironment().getDefaultScreenDevice();
 		dispositivoGrafico.setFullScreenWindow(frame);
 		
+		crearArchivos();
 	}
 	
 	private Coordinate coordenadaDeInicio() {
@@ -129,10 +130,16 @@ public class Mapa {
 		
 		return coordenadaInicio;
 	}
+	
 	private Color setearColorDeFondo() {
 		Color colorFondo = new Color(255, 191, 0);
 		
 		return colorFondo;
+	}
+	
+	private void crearArchivos() {
+		controladores.ControladorDeArchivos.crearArchivoDeVertices();
+		controladores.ControladorDeArchivos.crearArchivoDeAristas();
 	}
 
 }

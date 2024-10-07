@@ -14,7 +14,6 @@ public class Vertice {
 		this.nombre = nombre;
 		this.coordenadaX = coordenadaX;
 		this.coordenadaY = coordenadaY;
-		System.out.println("pase por aca");
 	}
 	
 	public String getNombre() {
@@ -24,8 +23,20 @@ public class Vertice {
 	public BigDecimal getCoordX() {
 		return this.coordenadaX;
 	}
+	
 	public BigDecimal getCoordY() {
 		return this.coordenadaY;
 	}
 
+	@Override
+	public String toString() {
+		StringBuilder vertice = new StringBuilder();
+		vertice.append("nombre: " + getNombre());
+		vertice.append(System.lineSeparator());
+		vertice.append("Coordenada X: " + getCoordX());
+		vertice.append(System.lineSeparator());
+		vertice.append("Coordenada Y: " + getCoordY());
+		
+		return vertice.toString();
+	}
 }
