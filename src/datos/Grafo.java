@@ -28,9 +28,6 @@ public class Grafo {
 	    	
 	    }
 	    
-	    
-	    
-	    
 	    // Método para agregar un vértice al grafo
 	    public void agregarVertice(Vertice vertice) {
 	    	

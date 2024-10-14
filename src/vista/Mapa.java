@@ -109,8 +109,7 @@ public class Mapa {
 		mapa.setBounds(238, 5, 496, 427);
 		
 		comboBox = new JComboBox();
-		comboBox.setBounds(10, 41, 196, 30);
-		comboBox.setFont(new Font("Tahoma", Font.PLAIN, 17));
+		configurarComboBox();
 		
 		nombresEspias = null;
 		
@@ -290,6 +289,14 @@ public class Mapa {
 		return existe;
 	}
 	
+	public void verificarQueLosCamposNoEstenVacios() {
+
+		if(textField.getText() == "" || textField_1.getText() == "") {
+			JOptionPane.showMessageDialog(frame, "Ambos campos deben estar llenos");
+			System.out.println("Pasé por aca");
+		}
+	}
+	
 	public void IngresarEspiaAlListadoDesplegable(List <String> espia) {
 		
 		for(String valor : espia ) {
@@ -374,6 +381,7 @@ public class Mapa {
 
 	private void configurarTxtAbajo() {
 		textField_1.setBounds(10, 136, 122, 20);
+		textField_1.setText("");
 		panelDeControl.add(textField_1);
 		textField_1.setColumns(10);
 		
@@ -381,6 +389,7 @@ public class Mapa {
 
 	private void configurarTxtArriba() {	
 		textField.setBounds(10, 95, 122, 20);
+		textField.setText("");
 		panelDeControl.add(textField);
 		textField.setColumns(10);
 	}
@@ -400,6 +409,11 @@ public class Mapa {
 		
 	}
 
+	private void configurarComboBox() {
+		comboBox.setBounds(10, 41, 196, 30);
+		comboBox.setFont(new Font("Tahoma", Font.PLAIN, 17));
+	}
+	
 	private void configurarFrame() {
 		frame.setBounds(100, 100, 1113, 508);
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);

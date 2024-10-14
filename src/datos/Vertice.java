@@ -8,12 +8,29 @@ public class Vertice {
 	private BigDecimal coordenadaX;
 	private BigDecimal coordenadaY;
 	
-	private HashMap <String, Vertice> vertices;
-	
 	public Vertice (String nombre, BigDecimal coordenadaX, BigDecimal coordenadaY) {
+		validarEntradaDeVertice(nombre, coordenadaX, coordenadaY);
 		this.nombre = nombre;
 		this.coordenadaX = coordenadaX;
 		this.coordenadaY = coordenadaY;
+	}
+	
+	
+	
+	private void validarEntradaDeVertice(String nombre, BigDecimal coordenadaX, BigDecimal coordenadaY) {
+		if(nombre == null) {
+			throw new RuntimeException("ingresar nombre");
+		}
+		if(nombre == "") {
+			throw new RuntimeException("el nombre no puede estar vacio");
+		}
+		validarCoordenadas(coordenadaX, coordenadaY);
+	}
+	
+	private void validarCoordenadas(BigDecimal coordenadaX, BigDecimal coordenadaY) {
+		if(coordenadaX == null || coordenadaY == null) {
+			throw new RuntimeException("Esto nunca deberia pasar pero por las dudas");
+		}
 	}
 	
 	public String getNombre() {

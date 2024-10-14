@@ -204,7 +204,7 @@ public class PantallaInicio {
 		_btnComenzar.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
-				MapaAnterior mapa = new MapaAnterior();
+				Mapa mapa = new Mapa();
 				_frame.dispose();
 			}
 		});
