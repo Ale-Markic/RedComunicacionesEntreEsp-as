@@ -41,6 +41,8 @@ public class Grafo {
 
 	// Método para agregar una arista entre dos vértices
 	public void agregarArista(Vertice origen, Vertice destino, double peso) {
+		verificarValores(origen, destino, peso);
+		
 		agregarVertice(origen);
 		agregarVertice(destino);
 
@@ -76,8 +78,17 @@ public class Grafo {
 	public Set<Arista> obtenerVecinos(Vertice vertice) {
 		return adjList.get(vertice);
 	}
+	
+	public void verificarValores(Vertice origen, Vertice destino, double peso) {
+		if(origen == null || destino == null) {
+			throw new RuntimeException("Debe ingresar vertices validos");
+		}
+		if(peso > 1.0 || peso < 0.0) {
+			throw new RuntimeException("Debe ingresar un peso valido");
+		}
+	}
 
-	// Método para imprimir el grafo
+	
 	@Override
 	public String toString() {
 		StringBuilder sb = new StringBuilder();

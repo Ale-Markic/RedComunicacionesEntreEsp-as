@@ -32,5 +32,12 @@ public class GrafoTest {
 		grafo.agregarVertice(vertice);
 		grafo.agregarVertice(vertice2);
 	}
+	
+	@Test(expected = RuntimeException.class)
+	public void agregarVerticeNullArrojaError() {
+		Vertice vertice = null;
+		Grafo grafo = new Grafo();
+		grafo.agregarVertice(vertice);
 
+	}
 }
