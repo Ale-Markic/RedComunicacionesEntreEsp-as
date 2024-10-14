@@ -204,8 +204,7 @@ public class PantallaInicio {
 		_btnComenzar.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
-				Mapa mapa = new Mapa();
-				//JOptionPane.showInputDialog("aca deberia iniciar la aplicacion");
+				MapaAnterior mapa = new MapaAnterior();
 				_frame.dispose();
 			}
 		});

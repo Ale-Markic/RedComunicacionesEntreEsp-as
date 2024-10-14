@@ -1,5 +1,6 @@
 package datos;
 
+import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
 
@@ -13,21 +14,25 @@ public class ArchivosJSON {
 		Gson gson = new GsonBuilder().setPrettyPrinting().create();
 		
 		String json = gson.toJson(vertice);
-		String filepath = "Vertices.json";
+		String filepath = "/recursos/prueba.txt";
 		
-		System.out.println("Hasta aca llegue bien, con el siguiente vertice: ");
-		System.out.println(vertice.toString());
-		
+		try(FileWriter writer = new FileWriter(filepath)){
+			//writer.write(json);
+			System.out.println(json.toString());
+			writer.close();
+		}
+		catch(IOException e) {
+			e.printStackTrace();
+		}
 	}
 	
 	
 	
 	
-	
+	/*
 	
 	public static void crearJsonDeVertices() {
 		try(FileWriter writer = new FileWriter("Vertices.json")){
-			System.out.println("Archivo JSON de vertices creado con exito");
 		}
 		catch(IOException e) {
 			e.printStackTrace();
@@ -42,6 +47,6 @@ public class ArchivosJSON {
 			e.printStackTrace();
 		}
 	}
-	
+	*/
 
 }

@@ -7,11 +7,11 @@ import datos.Vertice;
 public class ControladorDeArchivos {
 	
 	public static void crearArchivoDeVertices() {
-		ArchivosJSON.crearJsonDeVertices();
+		//ArchivosJSON.crearJsonDeVertices();
 	}
 	
 	public static void crearArchivoDeAristas() {
-		ArchivosJSON.crearJsonDeAristas();
+		//ArchivosJSON.crearJsonDeAristas();
 	}
 	
 	public static void agregarVerticeAJSON(Vertice vertice) {
