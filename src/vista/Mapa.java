@@ -291,9 +291,8 @@ public class Mapa {
 	
 	public void verificarQueLosCamposNoEstenVacios() {
 
-		if(textField.getText() == "" || textField_1.getText() == "") {
-			JOptionPane.showMessageDialog(frame, "Ambos campos deben estar llenos");
-			System.out.println("Pasé por aca");
+		if(textField.getText().isBlank() || textField_1.getText().isBlank()) {
+			JOptionPane.showMessageDialog(frame, "Ambos campos  de texto deben estar llenos");
 		}
 	}
 	
