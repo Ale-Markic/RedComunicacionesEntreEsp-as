@@ -212,20 +212,34 @@ public class Mapa {
 		this.btnComunicacion.addActionListener(accion);
 	}
 	
-	public void CrearNuevoEspia(ActionListener evento) {
-		this.CrearEspia.addActionListener(evento);
-		
+	public void botonBorrarComunicacion(ActionListener accion) {
+		this.btnBorrarComunicacion.addActionListener(accion);
 	}
 	
-	public void visible() {
-		this.frame.setVisible(true);
+	public void CrearNuevoEspia(ActionListener evento) {
+		this.CrearEspia.addActionListener(evento);
+	}
+	
+	public void obtenerElementosDelComboBox(ActionListener accion) {
+		comboBox.addActionListener(accion);
+	}
+	
+	public void llenarLosCamposDeTexto() {
+		String nombreEspia = (String) comboBox.getSelectedItem();
+		ocuparEspaciosVacios(nombreEspia);
+	}
+	
+	private void ocuparEspaciosVacios(String nombreEspia) {
+		if(textField.getText().isBlank()) {
+			textField.setText(nombreEspia);
+		}
+		else {
+			textField_1.setText(nombreEspia);
+		}
 	}
 	
 	private void guardarCoordenadasClick(Coordinate clickMapa) {
-		
 		this.coordenadasTemporal = clickMapa;
-		
-		
 	}
 	
 	public void AccionClickEnMapa(MouseListener accion) {
@@ -290,7 +304,6 @@ public class Mapa {
 	}
 	
 	public void verificarQueLosCamposNoEstenVacios() {
-
 		if(textField.getText().isBlank() || textField_1.getText().isBlank()) {
 			JOptionPane.showMessageDialog(frame, "Ambos campos  de texto deben estar llenos");
 		}
@@ -417,6 +430,9 @@ public class Mapa {
 		frame.setBounds(100, 100, 1113, 508);
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frame.getContentPane().setLayout(null);
-		
+	}
+	
+	public void visible() {
+		this.frame.setVisible(true);
 	}
 }

@@ -26,6 +26,8 @@ public class ControlCentral {
 		this.logica= logica;
 		
 		vista.BotonEstablecerComunicacion(new accionesdeComunicacion());
+		vista.botonBorrarComunicacion(new accionDeBorrarComunicacion());
+		vista.obtenerElementosDelComboBox(new accionesDelComboBox());
 		
 		vista.AccionClickEnMapa(new accionClickDentrodelMapa());
 		
@@ -34,12 +36,54 @@ public class ControlCentral {
 	
 	}
 	
+	class accionesDelComboBox implements ActionListener{
+		@Override
+		public void actionPerformed(ActionEvent eventoRealizado) {
+			vista.llenarLosCamposDeTexto();
+		}
+	}
+	
+	class accionDeBorrarComunicacion implements ActionListener{
+		@Override
+		public void actionPerformed(ActionEvent eventoRealizado) {
+			vista.verificarQueLosCamposNoEstenVacios();
+		}
+	}
+	
 	class accionesdeComunicacion implements ActionListener{
 		@Override
 		public void actionPerformed(ActionEvent eventoRealizado) {
 			vista.verificarQueLosCamposNoEstenVacios();
 		}
 	} 
+	
+	
+	class accionCrearEspia implements ActionListener {
+		@Override
+		public void actionPerformed(ActionEvent e) {
+
+			String nombreEspia = vista.ObetenerNombreEspia(); // Obtener nombre del espía	            
+			Coordinate coord = vista.ObtenerCoordenadasClick();
+			Vertice nuevoVertice = new Vertice (nombreEspia,BigDecimal.valueOf(coord.getLon()),BigDecimal.valueOf(coord.getLat()));
+
+			//Latitud = Y
+			//Longitud X
+
+			if(!logica.existeVertice(nombreEspia)) {
+
+				logica.agregarVertice(nuevoVertice);
+
+				vista.crearPunto(nombreEspia, coord);
+				vista.ocultarPanelCreacionEspia();
+				vista.borrarNombreEspia();
+
+				vista.IngresarEspiaAlListadoDesplegable(logica.ListaDeEspiasEspias());
+				logica.ImprimirNombresVertices();
+				vista.actualizarVistaMapa();
+
+			}	        
+		}
+	}
 	
 	class accionClickDentrodelMapa implements MouseListener{
 		@Override
@@ -72,30 +116,5 @@ public class ControlCentral {
 	}
 		
 	
-	class accionCrearEspia implements ActionListener {
-		@Override
-		public void actionPerformed(ActionEvent e) {
-
-			String nombreEspia = vista.ObetenerNombreEspia(); // Obtener nombre del espía	            
-			Coordinate coord = vista.ObtenerCoordenadasClick();
-			Vertice nuevoVertice = new Vertice (nombreEspia,BigDecimal.valueOf(coord.getLon()),BigDecimal.valueOf(coord.getLat()));
-
-			//Latitud = Y
-			//Longitud X
-
-			if(!logica.existeVertice(nombreEspia)) {
-
-				logica.agregarVertice(nuevoVertice);
-
-				vista.crearPunto(nombreEspia, coord);
-				vista.ocultarPanelCreacionEspia();
-				vista.borrarNombreEspia();
-
-				vista.IngresarEspiaAlListadoDesplegable(logica.ListaDeEspiasEspias());
-				logica.ImprimirNombresVertices();
-				vista.actualizarVistaMapa();
-
-			}	        
-		}
-	}
+	
 }
