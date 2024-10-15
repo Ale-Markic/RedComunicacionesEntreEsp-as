@@ -53,7 +53,7 @@ public class Arista {
 			return false;
 		}
 		Arista aux = (Arista) obj;
-		return aux.getPeso() == this.getPeso() && aux.getVerticeOrigen() == this.getVerticeOrigen() && aux.getVerticeDestino() == this.getVerticeDestino();
+		return aux.getPeso() == this.getPeso() && aux.ObtenerVerticeOrigen() == this.ObtenerVerticeOrigen() && aux.ObtenerVerticeDestino() == this.ObtenerVerticeDestino();
 	}
 	
 	
@@ -62,10 +62,11 @@ public class Arista {
 		return true;
 	}
 	
-	public Vertice getVerticeOrigen() {
+	public Vertice ObtenerVerticeOrigen() {
 		return this.verticeOrigen;
 	}
-	public Vertice getVerticeDestino() {
+	
+	public Vertice ObtenerVerticeDestino() {
 		return this.verticeDestino;
 	}
 	
