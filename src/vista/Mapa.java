@@ -181,23 +181,18 @@ public class Mapa {
 	
 
 
-	private void configurarMapa() {
-		mapa.setDisplayPosition(coordenadaDeInicio(), 5);
-		mapa.setBounds(0, 0, panelMapa.getWidth(), panelMapa.getHeight());
-		panelMapa.setLayout(null);
-		this.panelMapa.add(mapa);
-		
-	}
-	
-	public void actualizarVistaMapa() {
-		this.mapa.revalidate();
-	}
+
 	
 	public Coordinate coordenadaDeInicio() {
 
 		Coordinate coordenadaInicio = new Coordinate(-34.521, -58.7008);
 		
 		return coordenadaInicio;
+	}
+	
+	
+	public void AccionClickEnMapa(MouseListener accion) {
+		this.mapa.addMouseListener(accion);
 	}
 	
 	private void mostrarPanelCreacionEspia() {
@@ -220,11 +215,29 @@ public class Mapa {
 		this.CrearEspia.addActionListener(evento);
 	}
 	
+	public void btnBorrarEspia(ActionListener evento) {
+		this.btnBorrarEspia.addActionListener(evento);
+	}
+	
+	public void borrarStringEnTextField() {
+		textField.setText(null);
+	}
+	
+	public void btnBorrarEspiaDos(ActionListener evento) {
+		this.btnBorrarEspiaDos.addActionListener(evento);
+	}
+	public void borrarStrinEnTextField_1() {
+		textField_1.setText(null);
+	}
+	
 	public void obtenerElementosDelComboBox(ActionListener accion) {
 		comboBox.addActionListener(accion);
 	}
 	
 	public void llenarLosCamposDeTexto() {
+		if(comboBox.getSelectedIndex() == 0) {
+			return;
+		}
 		String nombreEspia = (String) comboBox.getSelectedItem();
 		ocuparEspaciosVacios(nombreEspia);
 	}
@@ -242,9 +255,6 @@ public class Mapa {
 		this.coordenadasTemporal = clickMapa;
 	}
 	
-	public void AccionClickEnMapa(MouseListener accion) {
-		this.mapa.addMouseListener(accion);
-	}
 	
 	public void crearPunto(String nombreEspia,Coordinate NuevasCoordenadas) {
 		
@@ -284,11 +294,6 @@ public class Mapa {
 		CancelarCreacionEspia();		
 		
 	}
-
-	public void borrarNombreEspia() {
-		this.txtNombreEspia.setText("");
-		
-	}
 	
 	public boolean seEncuentraEnComboBox(String valor) {
 		boolean existe = false;
@@ -315,6 +320,10 @@ public class Mapa {
 			if(!(seEncuentraEnComboBox(valor))) {
 			this.comboBox.addItem(valor);
 			}}
+	}
+	
+	public void borrarNombreEspia() {
+		this.txtNombreEspia.setText("");	
 	}
 	
 	private void configurarBtnCancelar() {
@@ -430,6 +439,18 @@ public class Mapa {
 		frame.setBounds(100, 100, 1113, 508);
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frame.getContentPane().setLayout(null);
+	}
+	
+	private void configurarMapa() {
+		mapa.setDisplayPosition(coordenadaDeInicio(), 5);
+		mapa.setBounds(0, 0, panelMapa.getWidth(), panelMapa.getHeight());
+		panelMapa.setLayout(null);
+		this.panelMapa.add(mapa);
+		
+	}
+	
+	public void actualizarVistaMapa() {
+		this.mapa.revalidate();
 	}
 	
 	public void visible() {

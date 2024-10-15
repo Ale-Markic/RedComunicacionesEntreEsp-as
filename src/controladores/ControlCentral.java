@@ -28,6 +28,8 @@ public class ControlCentral {
 		vista.BotonEstablecerComunicacion(new accionesdeComunicacion());
 		vista.botonBorrarComunicacion(new accionDeBorrarComunicacion());
 		vista.obtenerElementosDelComboBox(new accionesDelComboBox());
+		vista.btnBorrarEspia(new accionDeBorrarEspiaEnelTextField());
+		vista.btnBorrarEspiaDos(new accionDeBorrarEspiaEnElTexField_1());
 		
 		vista.AccionClickEnMapa(new accionClickDentrodelMapa());
 		
@@ -82,6 +84,20 @@ public class ControlCentral {
 				vista.actualizarVistaMapa();
 
 			}	        
+		}
+	}
+	
+	class accionDeBorrarEspiaEnElTexField_1 implements ActionListener{
+		@Override
+		public void actionPerformed(ActionEvent eventoRealizado) {
+			vista.borrarStrinEnTextField_1();
+		}
+	}
+	
+	class accionDeBorrarEspiaEnelTextField implements ActionListener{
+		@Override
+		public void actionPerformed(ActionEvent eventoRelizado) {
+			vista.borrarStringEnTextField();
 		}
 	}
 	
