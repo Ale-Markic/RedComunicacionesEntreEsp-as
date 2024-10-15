@@ -56,6 +56,7 @@ public class ControlCentral {
 		@Override
 		public void actionPerformed(ActionEvent eventoRealizado) {
 			vista.verificarQueLosCamposNoEstenVacios();
+			vista.pedirPesoDeLaArista();
 		}
 	} 
 	

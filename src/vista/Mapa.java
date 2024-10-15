@@ -4,7 +4,7 @@ import java.awt.EventQueue;
 import java.awt.Color;
 
 
-import java.awt.EventQueue;
+//import java.awt.EventQueue;
 import java.awt.GraphicsDevice;
 import java.awt.GraphicsEnvironment;
 import java.awt.Point;
@@ -26,9 +26,9 @@ import org.openstreetmap.gui.jmapviewer.JMapViewer;
 import org.openstreetmap.gui.jmapviewer.MapMarkerDot;
 import org.openstreetmap.gui.jmapviewer.interfaces.MapMarker;
 
-import javax.swing.JFrame;
-import javax.swing.JPanel;
-import java.awt.Color;
+//import javax.swing.JFrame;
+//import javax.swing.JPanel;
+//import java.awt.Color;
 import javax.swing.JComboBox;
 import javax.swing.DefaultComboBoxModel;
 import java.awt.Font;
@@ -205,6 +205,17 @@ public class Mapa {
 	
 	public void BotonEstablecerComunicacion(ActionListener accion) {
 		this.btnComunicacion.addActionListener(accion);
+	}
+	
+	public void pedirPesoDeLaArista() {
+		String input = JOptionPane.showInputDialog(frame, "Por favor ingrese una probabilidad entre 0 y 1");
+		double peso = Double.parseDouble(input);
+		crearArista(peso);
+	}
+	
+	private void crearArista(double peso) {
+		ControladorDelGrafo.crearArista(textField.getText(),textField_1.getText(), peso);
+		//Seguir de acá.
 	}
 	
 	public void botonBorrarComunicacion(ActionListener accion) {
