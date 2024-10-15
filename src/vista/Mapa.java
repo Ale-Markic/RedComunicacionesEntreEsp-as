@@ -214,7 +214,7 @@ public class Mapa {
 	}
 	
 	private void crearArista(double peso) {
-		ControladorDelGrafo.crearArista(textField.getText(),textField_1.getText(), peso);
+		//ControladorDelGrafo.crearArista(textField.getText(),textField_1.getText(), peso);
 		//Seguir de acá.
 	}
 	
