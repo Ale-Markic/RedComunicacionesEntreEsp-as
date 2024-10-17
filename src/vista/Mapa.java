@@ -26,6 +26,7 @@ import org.openstreetmap.gui.jmapviewer.JMapViewer;
 import org.openstreetmap.gui.jmapviewer.MapMarkerDot;
 import org.openstreetmap.gui.jmapviewer.MapPolygonImpl;
 import org.openstreetmap.gui.jmapviewer.interfaces.MapMarker;
+import org.openstreetmap.gui.jmapviewer.interfaces.MapPolygon;
 
 //import javax.swing.JFrame;
 //import javax.swing.JPanel;
@@ -34,6 +35,7 @@ import javax.swing.JComboBox;
 import javax.swing.DefaultComboBoxModel;
 import java.awt.Font;
 import javax.swing.JTextField;
+import javax.swing.table.DefaultTableModel;
 import javax.swing.JButton;
 import javax.swing.JTable;
 import javax.swing.JLabel;
@@ -64,6 +66,8 @@ public class Mapa {
 
 	private JComboBox <String>comboBox;
 	private List<String> nombresEspias;
+	private JTable table;
+	private DefaultTableModel model;
 
 
 	/**
@@ -179,7 +183,7 @@ public class Mapa {
 
 	}
 
-	public void dibujarLinea(Coordinate inicio, Coordinate fin) {
+	public void dibujarLinea(Coordinate inicio, Coordinate fin, String origen, String destino) {
 
 		List<Coordinate> coordenadas = new ArrayList<>();
 		coordenadas.add(inicio);
@@ -187,7 +191,10 @@ public class Mapa {
 		coordenadas.add(inicio);
 
 
-		this.mapa.addMapPolygon(new MapPolygonImpl(coordenadas));
+		MapPolygonImpl datos =new MapPolygonImpl(coordenadas);
+		datos.setName(origen+"-"+destino);
+		this.mapa.addMapPolygon(datos);
+		actualizarVistaMapa();
 		this.mapa.repaint();
 	}
 
@@ -195,16 +202,51 @@ public class Mapa {
 		this.btnCaminoMinimo.addActionListener(accion);
 	}
 
+	public void eliminarArista(ActionListener accion) { 
+		this.btnBorrarComunicacion.addActionListener(accion);		   
+	}
+
+	public void eliminarComunicacion(String inicio, String fin) {
+		String nombre = inicio+"-"+fin;
+		for (MapPolygon poligono : this.mapa.getMapPolygonList()) {
+			if (nombre.equals(poligono.getName())) {
+				this.mapa.removeMapPolygon(poligono);
+				break;
+			}
+		}
+	}
+	
+	public void eliminarFilaPorOrigenDestino(String origen, String destino) {
+		
+	    for (int i = 0; i < model.getRowCount(); i++) {
+	        String origenActual = model.getValueAt(i, 0).toString(); // Obtener el valor de la columna "Origen"
+	        String destinoActual = model.getValueAt(i, 2).toString(); // Obtener el valor de la columna "Destino"
+
+	        if (origenActual.equals(origen) && destinoActual.equals(destino)) {
+	            model.removeRow(i); // Eliminar la fila
+	            return; // Salir del método después de eliminar
+	        }
+	    }
+	    
+	    for (int i = 0; i < model.getRowCount(); i++) {
+	        String origenActual = model.getValueAt(i, 0).toString(); // Obtener el valor de la columna "Origen"
+	        String destinoActual = model.getValueAt(i, 2).toString(); // Obtener el valor de la columna "Destino"
+
+	        if (origenActual.equals(destino) && destinoActual.equals(origen)) {
+	            model.removeRow(i); // Eliminar la fila
+	            return; // Salir del método después de eliminar
+	        }
+	    }
+	    // Mensaje si no se encuentra la fila
+	    JOptionPane.showMessageDialog(frame, "No se encontró la combinación de origen y destino.", "Error", JOptionPane.ERROR_MESSAGE);
+	}
 
 	public void cantidadDeRectangulo() {
 		System.out.print("La cantidad de poligonos es: " + this.mapa.getMapPolygonList().size()+"\n");
-
 	}
 
 	public Coordinate coordenadaDeInicio() {
-
 		Coordinate coordenadaInicio = new Coordinate(-34.521, -58.7008);
-
 		return coordenadaInicio;
 	}
 
@@ -307,6 +349,14 @@ public class Mapa {
 		MapMarker punto = new MapMarkerDot(nombreEspia, agregarMarcador);
 
 		return punto;
+	}
+	
+	public void BorrarGrafo(ActionListener evento) {
+		this.btnBorrarGrafo.addActionListener(evento);
+	}
+	
+	public void eliminarPoligonos() {
+		this.mapa.removeAllMapPolygons();
 	}
 
 	public String ObetenerNombreEspia() {	

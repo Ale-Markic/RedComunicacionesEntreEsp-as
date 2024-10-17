@@ -178,6 +178,16 @@ public class Grafo {
 			throw new RuntimeException("Debe ingresar un peso valido");
 		}
 	}
+	
+    public void imprimirAristas() {
+  	  Set<Arista> mst = kruskal();
+
+        // Imprimir las aristas del MST
+        for (Arista arista : mst) {
+            System.out.println(arista.ObtenerVerticeOrigen().getNombre()+"-->"+arista.ObtenerVerticeDestino().getNombre()+"\n");
+            
+        }
+  }
 
 
 	@Override
