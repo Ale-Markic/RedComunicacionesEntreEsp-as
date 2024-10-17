@@ -48,10 +48,11 @@ public class PantallaInicio {
 			"/recursos/Imagen Argentina conectada con pins.jpg"
 	};
 	
-
+	/*
 	/**
 	 * Launch the application.
 	 */
+	
 	public static void main(String[] args) {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
@@ -64,6 +65,7 @@ public class PantallaInicio {
 			}
 		});
 	}
+	
 
 	/**
 	 * Create the application.
@@ -219,7 +221,7 @@ public class PantallaInicio {
 		_btnInformacion.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
-				PantallaInformacion pantallaInformacion = new PantallaInformacion();
+				//PantallaInformacion pantallaInformacion = new PantallaInformacion();
 				_frame.dispose();
 			}
 			
@@ -233,6 +235,10 @@ public class PantallaInicio {
 	
 	private void reiniciarIndiceImagen() {
 		this._indiceImagen = 0;
+	}
+	
+	public void visible() {
+		this._frame.setVisible(true);
 	}
 
 }

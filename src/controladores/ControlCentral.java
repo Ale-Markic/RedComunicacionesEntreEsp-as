@@ -7,6 +7,7 @@ import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.math.BigDecimal;
 import java.util.Map;
+import java.util.Set;
 
 import org.openstreetmap.gui.jmapviewer.JMapViewer;
 import org.openstreetmap.gui.jmapviewer.Coordinate;
@@ -30,12 +31,23 @@ public class ControlCentral {
 		vista.obtenerElementosDelComboBox(new accionesDelComboBox());
 		vista.btnBorrarEspia(new accionDeBorrarEspiaEnelTextField());
 		vista.btnBorrarEspiaDos(new accionDeBorrarEspiaEnElTexField_1());
+		vista.BuscarCaminoMinimo(new accionCaminoMinimo());
 		
 		vista.AccionClickEnMapa(new accionClickDentrodelMapa());
 		
 		vista.CrearNuevoEspia(new accionCrearEspia());
-		
+	}
 	
+	class accionCaminoMinimo implements ActionListener{
+		@Override
+		public void actionPerformed(ActionEvent eventoRealizado) {
+  		  Set<Arista> mst = logica.kruskal();
+
+	        // Imprimir las aristas del MST
+	        for (Arista arista : mst) {
+	            System.out.println(arista.toString());
+	        }
+		}
 	}
 	
 	class accionesDelComboBox implements ActionListener{
@@ -56,7 +68,22 @@ public class ControlCentral {
 		@Override
 		public void actionPerformed(ActionEvent eventoRealizado) {
 			vista.verificarQueLosCamposNoEstenVacios();
-			vista.pedirPesoDeLaArista();
+			 double peso = vista.pedirPesoDeLaArista();
+			
+			if(logica.existeVertice(vista.getNombreEspiaTextField()) && logica.existeVertice(vista.getNombreEspiaTextField_1())) {
+				logica.agregarArista(vista.getNombreEspiaTextField(),vista.getNombreEspiaTextField_1(), peso);
+				
+				
+				Vertice espia1 = logica.ObtenerVertice(vista.getNombreEspiaTextField());
+				Vertice espia2 = logica.ObtenerVertice(vista.getNombreEspiaTextField_1());
+				
+				Coordinate coordenada1 = new Coordinate( espia1.getCoordX().doubleValue(),espia1.getCoordY().doubleValue());
+				Coordinate coordenada2 = new Coordinate( espia2.getCoordX().doubleValue(),espia2.getCoordY().doubleValue());
+				
+				vista.dibujarLinea(coordenada1,coordenada2);
+				vista.actualizarVistaMapa();
+				
+			}
 		}
 	} 
 	
@@ -67,10 +94,7 @@ public class ControlCentral {
 
 			String nombreEspia = vista.ObetenerNombreEspia(); // Obtener nombre del espía	            
 			Coordinate coord = vista.ObtenerCoordenadasClick();
-			Vertice nuevoVertice = new Vertice (nombreEspia,BigDecimal.valueOf(coord.getLon()),BigDecimal.valueOf(coord.getLat()));
-
-			//Latitud = Y
-			//Longitud X
+			Vertice nuevoVertice = new Vertice (nombreEspia,BigDecimal.valueOf(coord.getLat()),BigDecimal.valueOf(coord.getLon()));
 
 			if(!logica.existeVertice(nombreEspia)) {
 
@@ -81,7 +105,6 @@ public class ControlCentral {
 				vista.borrarNombreEspia();
 
 				vista.IngresarEspiaAlListadoDesplegable(logica.ListaDeEspiasEspias());
-				logica.ImprimirNombresVertices();
 				vista.actualizarVistaMapa();
 
 			}	        
