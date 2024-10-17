@@ -1,15 +1,14 @@
 package controladores;
 
-import java.awt.Point;
+
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.math.BigDecimal;
-import java.util.Map;
+
 import java.util.Set;
 
-import org.openstreetmap.gui.jmapviewer.JMapViewer;
 import org.openstreetmap.gui.jmapviewer.Coordinate;
 import datos.Vertice;
 import datos.Arista;
@@ -39,9 +38,26 @@ public class ControlCentral {
 
 		vista.eliminarArista(new accionEliminarRelacion());
 		vista.BorrarGrafo(new accionBorrarGrafo());
-		//vista.crearCaminoMinimoKrusKal(new accionarCaminoKruskal());
+		vista.crearCaminoMinimoKrusKal(new accionarCaminoKruskal());
 	}
 
+	class accionarCaminoKruskal implements ActionListener{
+		@Override
+		public void actionPerformed(ActionEvent eventoRealizado) {
+			vista.eliminarPoligonos();
+			Set<Arista> mst = logica.kruskal();
+
+			// Imprimir las aristas del MST
+			for (Arista arista : mst) {
+				Vertice origen = logica.ObtenerVertice(arista.ObtenerVerticeOrigen().getNombre());
+				Vertice destino = logica.ObtenerVertice(arista.ObtenerVerticeDestino().getNombre());
+				Coordinate origenCoordenada =new Coordinate(origen.getCoordX().doubleValue(),origen.getCoordY().doubleValue());
+				Coordinate origenDestino =new Coordinate(destino.getCoordX().doubleValue(),destino.getCoordY().doubleValue());
+
+				vista.dibujarLinea(origenCoordenada,origenDestino, arista.getPeso());;
+			}
+		}
+	}
 
 	class accionBorrarGrafo implements ActionListener{
 		@Override
@@ -89,14 +105,18 @@ public class ControlCentral {
 	class accionDeBorrarComunicacion implements ActionListener{
 		@Override
 		public void actionPerformed(ActionEvent eventoRealizado) {
-			vista.verificarQueLosCamposNoEstenVacios();
+			if(!(vista.verificarQueLosCamposNoEstenVacios())) {
+				return;
+			}
 		}
 	}
 
 	class accionesdeComunicacion implements ActionListener{
 		@Override
 		public void actionPerformed(ActionEvent eventoRealizado) {
-			vista.verificarQueLosCamposNoEstenVacios();
+			if(!(vista.verificarQueLosCamposNoEstenVacios())) {
+				return;
+			}
 			double peso = vista.pedirPesoDeLaArista();
 
 			if(logica.existeVertice(vista.getNombreEspiaTextField()) && logica.existeVertice(vista.getNombreEspiaTextField_1())) {
@@ -109,7 +129,7 @@ public class ControlCentral {
 				Coordinate coordenada1 = new Coordinate( espia1.getCoordX().doubleValue(),espia1.getCoordY().doubleValue());
 				Coordinate coordenada2 = new Coordinate( espia2.getCoordX().doubleValue(),espia2.getCoordY().doubleValue());
 
-				vista.dibujarLinea(coordenada1,coordenada2, espia1.getNombre(), espia2.getNombre());
+				vista.dibujarLinea(coordenada1,coordenada2, peso);
 				vista.actualizarVistaMapa();
 
 			}

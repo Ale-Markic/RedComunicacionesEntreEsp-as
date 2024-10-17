@@ -1,19 +1,15 @@
 package vista;
-import java.awt.EventQueue;
 
 import java.awt.Color;
 
 
-//import java.awt.EventQueue;
-import java.awt.GraphicsDevice;
-import java.awt.GraphicsEnvironment;
-import java.awt.Point;
+
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.awt.event.MouseAdapter;
+
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
-import java.math.BigDecimal;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -28,11 +24,9 @@ import org.openstreetmap.gui.jmapviewer.MapPolygonImpl;
 import org.openstreetmap.gui.jmapviewer.interfaces.MapMarker;
 import org.openstreetmap.gui.jmapviewer.interfaces.MapPolygon;
 
-//import javax.swing.JFrame;
-//import javax.swing.JPanel;
-//import java.awt.Color;
+
 import javax.swing.JComboBox;
-import javax.swing.DefaultComboBoxModel;
+
 import java.awt.Font;
 import javax.swing.JTextField;
 import javax.swing.table.DefaultTableModel;
@@ -48,7 +42,6 @@ public class Mapa {
 	private JPanel panelMapa;
 	private JPanel panelDeControl;
 	private JMapViewer mapa;
-	private ArrayList <Coordinate> coordenadas;
 	private JButton btnComunicacion;
 	private JButton btnBorrarComunicacion;
 	private JButton btnDibujarGrafo;
@@ -65,8 +58,6 @@ public class Mapa {
 	private Coordinate coordenadasTemporal;
 
 	private JComboBox <String>comboBox;
-	private List<String> nombresEspias;
-	private JTable table;
 	private DefaultTableModel model;
 
 
@@ -115,10 +106,6 @@ public class Mapa {
 
 		comboBox = new JComboBox();
 		configurarComboBox();
-
-		nombresEspias = null;
-
-
 
 		comboBox.addItem("Listado de Espias");
 		panelDeControl.add(comboBox);
@@ -183,7 +170,7 @@ public class Mapa {
 
 	}
 
-	public void dibujarLinea(Coordinate inicio, Coordinate fin, String origen, String destino) {
+	public void dibujarLinea(Coordinate inicio, Coordinate fin, double peso) {
 
 		List<Coordinate> coordenadas = new ArrayList<>();
 		coordenadas.add(inicio);
@@ -192,7 +179,8 @@ public class Mapa {
 
 
 		MapPolygonImpl datos =new MapPolygonImpl(coordenadas);
-		datos.setName(origen+"-"+destino);
+		String valorPeso = String.valueOf(peso);
+		datos.setName(valorPeso);
 		this.mapa.addMapPolygon(datos);
 		actualizarVistaMapa();
 		this.mapa.repaint();
@@ -217,6 +205,9 @@ public class Mapa {
 	}
 	
 	public void eliminarFilaPorOrigenDestino(String origen, String destino) {
+		if(this.model == null) {
+			return;
+		}
 		
 	    for (int i = 0; i < model.getRowCount(); i++) {
 	        String origenActual = model.getValueAt(i, 0).toString(); // Obtener el valor de la columna "Origen"
@@ -261,10 +252,6 @@ public class Mapa {
 
 	public void ocultarPanelCreacionEspia() {
 		this.PanelCreacionEspias.setVisible(false);
-	}
-
-	public void BotonEstablecerComunicacion(ActionListener accion) {
-		this.btnComunicacion.addActionListener(accion);
 	}
 
 	public double pedirPesoDeLaArista() {
@@ -358,6 +345,10 @@ public class Mapa {
 	public void eliminarPoligonos() {
 		this.mapa.removeAllMapPolygons();
 	}
+	
+	public void crearCaminoMinimoKrusKal(ActionListener accion) {
+		this.btnCaminoMinimo.addActionListener(accion);
+	}
 
 	public String ObetenerNombreEspia() {	
 		return this.txtNombreEspia.getText();
@@ -404,11 +395,17 @@ public class Mapa {
 		}
 		return existe;
 	}
+	
+	public void BotonEstablecerComunicacion(ActionListener accion) {
+		this.btnComunicacion.addActionListener(accion);
+	}
 
-	public void verificarQueLosCamposNoEstenVacios() {
+	public boolean verificarQueLosCamposNoEstenVacios() {
 		if(textField.getText().isBlank() || textField_1.getText().isBlank()) {
 			JOptionPane.showMessageDialog(frame, "Ambos campos  de texto deben estar llenos");
+			return false;
 		}
+		return true;
 	}
 
 	public void IngresarEspiaAlListadoDesplegable(List <String> espia) {
