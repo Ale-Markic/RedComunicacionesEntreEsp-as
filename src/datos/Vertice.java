@@ -1,7 +1,6 @@
 package datos;
 
 import java.math.BigDecimal;
-import java.util.HashMap;
 
 public class Vertice {
 	private String nombre;

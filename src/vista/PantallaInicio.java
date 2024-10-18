@@ -3,12 +3,10 @@ package vista;
 import java.awt.AlphaComposite;
 import java.awt.Color;
 import java.awt.EventQueue;
-import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.GraphicsDevice;
 import java.awt.GraphicsEnvironment;
 import java.awt.Image;
-import java.awt.LayoutManager;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.image.BufferedImage;
@@ -17,17 +15,17 @@ import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
-import javax.swing.JLayeredPane;
-import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.Timer;
-import javax.swing.UIManager;
-import javax.swing.UnsupportedLookAndFeelException;
+
+import apps.Main;
+
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 
 public class PantallaInicio {
-
+	
+	private boolean comenzar;
 	private JFrame _frame;
 	private JPanel _contenido;
 	private JLabel _lblImagen;
@@ -78,6 +76,7 @@ public class PantallaInicio {
 	 * Initialize the contents of the frame.
 	 */
 	private void initialize() {
+		comenzar = false;
 		inicializarElJFrame();
 		
 
@@ -206,7 +205,7 @@ public class PantallaInicio {
 		_btnComenzar.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
-				Mapa mapa = new Mapa();
+				Main.principal();
 				_frame.dispose();
 			}
 		});
@@ -221,11 +220,15 @@ public class PantallaInicio {
 		_btnInformacion.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
-				//PantallaInformacion pantallaInformacion = new PantallaInformacion();
+				Main.panInformacion();
 				_frame.dispose();
 			}
 			
 		});
+	}
+	
+	public boolean getComenzar() {
+		return this.comenzar;
 	}
 	
 	private void agregarBotonesALaImagen() {

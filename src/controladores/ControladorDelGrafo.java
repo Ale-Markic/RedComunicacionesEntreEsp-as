@@ -17,7 +17,6 @@ public class ControladorDelGrafo {
 	
 	private static void crearVertice(String nombre,BigDecimal coordenadaX, BigDecimal coordenadaY) {
 		Vertice nuevo = new Vertice(nombre, coordenadaX, coordenadaY);
-		ControladorDeArchivos.agregarVerticeAJSON(nuevo);
 	}
 
 }

@@ -111,5 +111,9 @@ public class PantallaInformacion {
 		Color colorFondo = new Color(194, 113, 138);		
 		return colorFondo;
 	}
+	
+	public void visible() {
+		this._frameInformacion.setVisible(true);
+	}
 
 }
